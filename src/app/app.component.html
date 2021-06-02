@@ -114,23 +114,26 @@
   <div class="container">
     <div class="filter">
       <label for="search">Search</label>
-      <input id="search" />
+      <input id="search" [(ngModel)]="search" (input)="applyFilters()" />
     </div>
     <div class="filter">
       <label for="brands">Brands</label>
-      <select id="brands"> </select>
+      <select id="brands" [(ngModel)]="brand" (change)="applyFilters()">
+        <option value="">All</option>
+        <option  *ngFor="let item of brandFilters" value="{{item.brand}}" >{{item.brand}}</option>
+      </select>
     </div>
     <div class="filter">
       <label for="in-stock">All</label>
-      <input type="radio" id="in-stock" name="stock" value="all" checked>
+      <input type="radio" id="in-stock" name="stock" (click)="onStockFilter(1)"  value="all" checked>
       <label for="in-stock">In stock</label>
-      <input type="radio" id="in-stock" name="stock" value="in-stock">
+      <input type="radio" id="in-stock" name="stock" (click)="onStockFilter(2)" value="in-stock">
       <label for="out-of-stock">Out of stock</label>
-      <input type="radio" id="out-of-stock" name="stock" value="out-of-stock">
+      <input type="radio" id="out-of-stock" name="stock" (click)="onStockFilter(3)" value="out-of-stock">
     </div>
   </div>
   <div class="container">
-    <products-table>
+    <products-table [productList]="productListDisplay">
     </products-table>
   </div>
 </div>
