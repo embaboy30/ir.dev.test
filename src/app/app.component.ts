@@ -28,8 +28,9 @@ export class AppComponent {
   }
   applyFilters() {
     this.productListDisplay =  this.productListOrig;
-    if (this.search != '' && this.search.length > 3) {
-      this.productListDisplay =  this.productListDisplay.filter(x => x.name.includes(this.search) || x.description.includes(this.search) || x.brand.includes(this.search));
+    if (this.search != '' && this.search.length >= 3) {
+      this.productListDisplay =  this.productListDisplay.filter(x => x.name.toLowerCase().includes(this.search.toLowerCase()) ||
+      x.description.toLowerCase().includes(this.search.toLowerCase()) || x.brand.toLowerCase().includes(this.search.toLowerCase()));
     }
     if (this.brand != '') {
       this.productListDisplay =  this.productListDisplay.filter(x => x.brand == this.brand);
